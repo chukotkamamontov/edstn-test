@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../../container/Container'
-import DropdownMenu from '../common/dropdown/dropdown-menu/DropdownMenu';
+import { changeActive } from '../../tools/helpers';
+import DropdownMenu, { DropdownItemTypes } from '../common/dropdown/dropdown-menu/DropdownMenu';
 import Tag from '../common/tag/Tag';
 import style from './Widget.module.css'
 
 const Widget = () => {
     const [selectOpen, setSelectOpen] = useState(false);
     const [multiMode, setMultiMode] = useState(false);
-    const [iconMode, setIconMode] = useState();
-    const [categories, setCategories] = useState([
+    const [iconMode, setIconMode] = useState(true);
+    const [categories, setCategories] = useState<DropdownItemTypes[]>([
 		{id: 1, title: 'Английский', icon: 'uk', active: false},
 		{id: 2, title: 'Немецкий', icon: 'de', active: false},
 		{id: 3, title: 'Русский', icon: 'ru', active: false},
@@ -17,10 +18,21 @@ const Widget = () => {
 		{id: 6, title: 'Польский', icon: 'pl', active: false},
 	]);
 
-    console.log(selectOpen)
-
     const toggleDropdown = () => {
         setSelectOpen(!selectOpen);
+    }
+
+    const toggleIconMode = () => {
+        setIconMode(!iconMode);
+    }
+
+    const toggleMultiMode = () => {
+        setMultiMode(!multiMode);
+    }
+
+    const filterCategories = (isActive: boolean, id: number) => {
+        console.log(isActive, id);
+        setCategories(() => [...changeActive(categories, id, isActive)]);
     }
 
     return (
@@ -28,11 +40,22 @@ const Widget = () => {
             <div className={style.widget}>
                 <div className={style.input}>
                     <div className={style['tag-block']}>
-                        {categories.map(item => <Tag key={item.id} title={item.title} styles='simple'></Tag>)}
+                        {categories.map(item => {
+                            if(item.active) return <Tag key={item.id} title={item.title} styles='simple'></Tag>
+                        })}
                     </div>
                     <div onClick={toggleDropdown} className={selectOpen ? style['arrow-up'] : style['arrow-down']}/>
                 </div>
-                <DropdownMenu selectOpen={selectOpen} data={categories} />
+                <DropdownMenu 
+                    iconMode={iconMode} 
+                    selectOpen={selectOpen} 
+                    data={categories}
+                    filterCategories={filterCategories}
+                     />
+                <br />
+                <button onClick={toggleIconMode}>icon</button>
+                <br />
+                <button onClick={toggleMultiMode}>multi</button>
             </div>
         </Container>
   )

@@ -1,27 +1,28 @@
-import React, { FC } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import style from './DropdownItem.module.css'
+import {DropdownItemTypes} from '../dropdown-menu/DropdownMenu'
 
 interface IDropdownItem {
-    id: number
-    src: string
-    title: string
-    active: boolean
+    data: DropdownItemTypes
+    filterCategories: (isActive: boolean, id: number) => void
     change: (id: number) => void
+    iconMode: boolean
 }
 
-const DropdownItem: FC<IDropdownItem> = (props) => {
-    const {id, src, title, active} = props
+const DropdownItem: FC<IDropdownItem> = ({data, change, iconMode, filterCategories}) => {
+    const {id, icon, title} = data
 
-    console.log(src)
+    const src = new URL(`./flags/${icon}.svg`, import.meta.url).href
 
-    const icon = new URL(`./flags/${src}.svg`, import.meta.url).href
+    const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        filterCategories(e.target.checked, id)
+    }
 
     return (
         <li className={style['menu-item']}>
-            <img src={icon} alt={title} />
+            {iconMode && <img src={src} alt={title} />}
             <label htmlFor={title} className={style['menu-item-label']}>{title}</label>
-            {/* <input type="checkbox" name="my-input" id="Русский" value="yes" className={style['menu-item-checkbox']} onChange={changeHandler}/> */}
-            <input type="checkbox" name="my-input" id={title} value="yes" className={style['menu-item-checkbox']}/>
+            <input type="checkbox" name="my-input" id={title} value={id} className={style['menu-item-checkbox']} onChange={changeHandler}/>
         </li>
     )
 }
