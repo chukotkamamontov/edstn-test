@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../container/Container'
-import { changeActive } from '../../tools/helpers';
+import { changeActive, killMulti, findCategory } from '../../tools/helpers';
 import DropdownMenu, { DropdownItemTypes } from '../common/dropdown/dropdown-menu/DropdownMenu';
 import Tag from '../common/tag/Tag';
 import style from './Widget.module.css'
@@ -27,12 +27,21 @@ const Widget = () => {
     }
 
     const toggleMultiMode = () => {
+        setCategories(killMulti(categories))
         setMultiMode(!multiMode);
     }
 
     const filterCategories = (isActive: boolean, id: number) => {
         console.log(isActive, id);
-        setCategories(() => [...changeActive(categories, id, isActive)]);
+        setCategories(() => [...changeActive(categories, id, multiMode, isActive)]);
+    }
+
+    const removeTag = (id: number) => {
+        setCategories(() => [...changeActive(categories, id, multiMode)]);
+    }
+
+    const getInputText = (str: string) => {
+        setCategories(findCategory(categories, str))
     }
 
     return (
@@ -41,7 +50,7 @@ const Widget = () => {
                 <div className={style.input}>
                     <div className={style['tag-block']}>
                         {categories.map(item => {
-                            if(item.active) return <Tag key={item.id} title={item.title} styles='simple'></Tag>
+                            if(item.active) return <Tag key={item.id} id={item.id} title={item.title} styles='simple' removeTag={removeTag}></Tag>
                         })}
                     </div>
                     <div onClick={toggleDropdown} className={selectOpen ? style['arrow-up'] : style['arrow-down']}/>
@@ -51,11 +60,12 @@ const Widget = () => {
                     selectOpen={selectOpen} 
                     data={categories}
                     filterCategories={filterCategories}
+                    getInputText={getInputText}
                      />
                 <br />
-                <button onClick={toggleIconMode}>icon</button>
+                <button onClick={toggleIconMode}>icon, {String(iconMode)}</button>
                 <br />
-                <button onClick={toggleMultiMode}>multi</button>
+                <button onClick={toggleMultiMode}>multi, {String(multiMode)}</button>
             </div>
         </Container>
   )

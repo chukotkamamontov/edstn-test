@@ -10,7 +10,7 @@ interface IDropdownItem {
 }
 
 const DropdownItem: FC<IDropdownItem> = ({data, change, iconMode, filterCategories}) => {
-    const {id, icon, title} = data
+    const {id, icon, title, active} = data
 
     const src = new URL(`./flags/${icon}.svg`, import.meta.url).href
 
@@ -22,7 +22,7 @@ const DropdownItem: FC<IDropdownItem> = ({data, change, iconMode, filterCategori
         <li className={style['menu-item']}>
             {iconMode && <img src={src} alt={title} />}
             <label htmlFor={title} className={style['menu-item-label']}>{title}</label>
-            <input type="checkbox" name="my-input" id={title} value={id} className={style['menu-item-checkbox']} onChange={changeHandler}/>
+            <input type="checkbox" name="my-input" checked={active} id={title} value={id} className={style['menu-item-checkbox']} onChange={changeHandler}/>
         </li>
     )
 }
