@@ -9,3 +9,7 @@
     padding: 6px, 12px, 6px, 12px;
     font-size: 12px;
 }
+
+.close {
+    cursor: pointer;
+}

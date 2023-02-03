@@ -1,23 +1,9 @@
 import React, { FC, useState } from 'react'
+import { DropdownMenuTypes } from '../../../../types/types';
 import DropdownItem from '../dropdown-item/DropdownItem'
 import style from './DropdownMenu.module.css'
 
-export type DropdownItemTypes = {
-    id: number
-    title: string
-    icon: string
-    active: boolean
-}
-
-interface IDropdownMenu {
-    iconMode: boolean
-    selectOpen: boolean
-    filterCategories: (isActive: boolean, id: number) => void
-    getInputText: (str: string) => void
-    data: Array<DropdownItemTypes>
-}
-
-const DropdownMenu: FC<IDropdownMenu> = ({ selectOpen, data, iconMode, filterCategories, getInputText}) => {
+const DropdownMenu: FC<DropdownMenuTypes> = ({ selectOpen, data, iconMode, filterCategories,  getInputText}) => {
     const [text, setText] = useState('');
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,11 +11,9 @@ const DropdownMenu: FC<IDropdownMenu> = ({ selectOpen, data, iconMode, filterCat
         getInputText(e.target.value)
     }
 
-    console.log(selectOpen)
-
     return (
         <div className={!selectOpen ? style['select-hide'] : style['select-show']}>
-            <input className={style['select-search']} type="text" value={text} onChange={changeHandler}/>
+            <input className={style['select-search']} type="text" value={text} onChange={changeHandler} placeholder='Поиск'/>
             <ul className={style.menu}>
                 {data.map(item => {
                     return <DropdownItem 
@@ -37,7 +21,6 @@ const DropdownMenu: FC<IDropdownMenu> = ({ selectOpen, data, iconMode, filterCat
                                 iconMode={iconMode}
                                 data={item}
                                 key={item.id} 
-                                change={() => {console.log('changed')}}  
                             />
                 })}
             </ul>

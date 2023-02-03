@@ -1,18 +1,24 @@
-import { DropdownItemTypes } from "../components/common/dropdown/dropdown-menu/DropdownMenu";
+import { DropdownItemTypes } from "../types/types"
+
+export function killActivity(array: Array<DropdownItemTypes>): Array<DropdownItemTypes> {
+    const serveArr = [...array];
+    return serveArr.map(item => {
+        item.active = false
+        return item
+    })
+}
 
 export function changeActive(array: Array<DropdownItemTypes>, id?: number, multiMode?: boolean, isActive?: boolean): Array<DropdownItemTypes> {
     
     if (!multiMode) {
-        console.log('multiMode' , 'false')
         const counter = [...array].reduce((acc,item) => {
             if(item.active === true) {
                 acc = acc + 1
             }
             return acc
         }, 0)
-        console.log(counter)
         if (counter > 0) {
-            return array
+            killActivity(array)
         }
     }
 
@@ -24,19 +30,13 @@ export function changeActive(array: Array<DropdownItemTypes>, id?: number, multi
         }
         return item
     })
+
     return newArray
 }
 
-export function killMulti(array: Array<DropdownItemTypes>): Array<DropdownItemTypes> {
-    const serveArr = [...array];
-    return serveArr.map(item => {
-        item.active = false
-        return item
-    })
-}
 
 export function findCategory(array: Array<DropdownItemTypes>, str: string): Array<DropdownItemTypes> {
-    let serveArr = killMulti(array)
+    let serveArr = killActivity(array)
     
     return serveArr.map(item => {
         if (item.title.includes(str) && str) {

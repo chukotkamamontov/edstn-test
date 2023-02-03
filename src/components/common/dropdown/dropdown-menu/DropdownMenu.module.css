@@ -33,6 +33,10 @@
     padding: 0;
 }
 
+.menu li:not(:last-child) {
+    border-bottom: 1px solid #F4F4F4;
+}
+
 .select-search {
     height: 40px;
     margin: 16px;
@@ -43,7 +47,7 @@
     border-radius: 10px;
     border: none;
     outline: none;
-    background-image: url('../../assets/images/search-icon.svg');
+    /* background-image: url('../../assets/images/search-icon.svg'); */
     background-repeat: no-repeat;
     background-position: 10px 10px;
 }

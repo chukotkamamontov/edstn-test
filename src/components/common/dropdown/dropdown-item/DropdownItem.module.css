@@ -5,11 +5,18 @@
     cursor: pointer;
 }
 
+.menu-item:hover {
+    background-color: #F4F4F4;
+}
+
 .menu-item-label {
     margin-left: 10px;
+    cursor: pointer;
+    flex-grow: 1;
 }
 
 .menu-item-checkbox {
     margin-left: auto;
     padding: 10px;
+    cursor: pointer;
 }

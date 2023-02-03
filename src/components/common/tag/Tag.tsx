@@ -1,18 +1,12 @@
 import React, { FC } from 'react'
+import { TagTypes } from '../../../types/types'
 import style from './Tag.module.css'
 
-interface ITag {
-    id: number
-    title: string
-    styles: string
-    removeTag: (id: number) => void
-}
-
-const Tag: FC<ITag> = ({ title, styles, id, removeTag }) => {
+const Tag: FC<TagTypes> = ({ title, styles, id, removeTag }) => {
     return (
         <div className={style[`${styles}`]}>
             <div>{title}</div>
-            <div onClick={() => removeTag(id)}>x</div>
+            <div className={style.close} onClick={() => removeTag(id)}>x</div>
         </div>
     )
 }
