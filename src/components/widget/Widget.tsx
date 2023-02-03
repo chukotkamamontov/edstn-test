@@ -50,7 +50,7 @@ const Widget = () => {
                 <div className={style['tag-wrapper']}>
                     <div className={style['tag-block']}>
                         {categories.map(item => {
-                            if(item.active) return <Tag key={item.id} id={item.id} title={item.title} styles='simple' removeTag={removeTag}></Tag>
+                            if (item.active) return <Tag key={item.id} id={item.id} title={item.title} styles='simple' removeTag={removeTag}/>
                         })}
                     </div>
                     <div onClick={toggleDropdown} className={selectOpen ? style['arrow-up'] : style['arrow-down']}/>
@@ -61,7 +61,7 @@ const Widget = () => {
                     data={categories}
                     filterCategories={filterCategories}
                     getInputText={getInputText}
-                     />
+                />
                 <br />
                 <button onClick={toggleIconMode}>icon: {String(iconMode)}</button>
                 <br />
