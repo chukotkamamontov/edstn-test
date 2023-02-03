@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './assets/css/app.css'
+import Widget from './components/widget/Widget'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div>
-      content will be here
+    <div className='app'>
+      <Widget />
     </div>
   )
 }

@@ -1,0 +1,42 @@
+.widget {
+    width: 400px;
+    height: 440px;
+  }
+  
+.input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #C1C1C1;
+    margin: 4px 0;
+}
+
+.tag-block {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+
+.arrow-up {
+    width: 5px;
+    height: 5px;
+    border-left: 1px solid #333333;
+    border-top: 1px solid #333333;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.arrow-down {
+    width: 5px;
+    height: 5px;
+    border-left: 1px solid #333333;
+    border-top: 1px solid #333333;
+    transform: rotate(-135deg);
+    cursor: pointer;
+}

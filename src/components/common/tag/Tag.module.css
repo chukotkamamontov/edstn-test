@@ -1,0 +1,11 @@
+.simple {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #F4F4F4;
+    width: 114px;
+    height: 24px;
+    border-radius: 8px;
+    padding: 6px, 12px, 6px, 12px;
+    font-size: 12px;
+}

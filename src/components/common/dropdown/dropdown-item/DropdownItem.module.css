@@ -1,0 +1,15 @@
+.menu-item {
+    display: flex;
+    height: 52px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.menu-item-label {
+    margin-left: 10px;
+}
+
+.menu-item-checkbox {
+    margin-left: auto;
+    padding: 10px;
+}
